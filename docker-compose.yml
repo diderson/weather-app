@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  # ubuntu apache service
+  ubuntu-apache:
+    build:
+      context: .
+      dockerfile: ./docker_src/apache.Dockerfile
+    container_name: apache_weather_app
+    volumes:
+      - ./src:/data/www
+    privileged: true
+    links:
+      - db
+    ports:
+      - '8085:80'
+    networks:
+      - decisioningit_weather
+
+  # Database service
+  db:
+    image: 'mysql:5.7.22'
+    container_name: db_weather
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=weather_app
+    volumes:
+      - ./databases/mysql:/var/lib/mysql:delegated
+    ports:
+      - "3313:3306"
+    networks:
+      - decisioningit_weather
+
+networks:
+  decisioningit_weather:

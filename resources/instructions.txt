@@ -1,0 +1,11 @@
+- Choose a PHP MVC Framework of your choice,
+- Choose a free REST API service to get weather data (like https://openweathermap.org or https://www.weatherapi.com)
+- Create a small application to get and store in a MySQL database the weather data of Montreal for the next 4 hours (see details below),
+- The data need to be fetch and store every 30 minutes by a cron job,
+- Create a small documentation (a text file) to quickly explain how to install and set your application (config/settings and SQL dump of your data structure).
+
+Note:
+- if you choose weatherapi, you need to get and store the following data: https://www.weatherapi.com/docs/#apis-realtime
+- if you choose openweathermap, you need to get and store the following data: https://openweathermap.org/current#parameter
+
+The project needs to integrate an unit test.
