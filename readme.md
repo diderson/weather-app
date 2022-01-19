@@ -1,8 +1,8 @@
-# Movie Booking Application
+# Weather Application
 
-Built using Laravel 8 Framework/ HTML / CSS / JS / and MySQL. Simple booking system for movie ticket
+Built using Laravel 7 Framework/ HTML / CSS / JS / and MySQL. Simple app to get weather of a specific city.
 
-you can demo at: https://payfast.dipatek.net
+you can demo at: https://decisioningit.dipatek.net
 
 ## Local Development
 
@@ -20,12 +20,12 @@ From the root directory boot the application. If you get a **permissions** error
 ```sh
 docker-compose up -d or docker-compose up to monitor the containers
 ```
-For the first setup on local You may want to seed data. to do so , ssh the apache container then point to www and run the necessary commands.
+For the first setup on local You may want to run migration in order to have table ready for your database to receive weather data. to do so , ssh the apache container then point to www and run the necessary commands.
 
 `docker exec -it apache bash` and `cd www`
 
 ```sh
-php artisan migrate:fresh --seed
+php artisan migrate
 ```
 
 ### Requirements for non docker environment
@@ -46,22 +46,28 @@ run the app from `src` folder: php artisan serve
 
 always run artisan command from src folder:
 
+- composer install
 - npm install (optional)
 - npm run dev (optional)
-- install dummy data: `php artisan migrate:fresh --seed`
+- install db `php artisan migrate`
 
 ## Generale Note
 
-There is 3 users with different role will be created after running a first migration seed
+there is a cron job scheduled in laravel to run every 30min to fetch weather for city as params e.g Montreal
 
-1. super_admin: 
-- username: `ddiderson@gmail.com` password: `passowrd`
+you can manually run the following command
 
-2. admin: 
-- username: `didi@gmail.com` password: `123456`
+- php artisan weather:cron Montreal
+- php artisan schedule:work ( This command will run in the foreground and invoke the scheduler every minute until you terminate the command) this is how manually you can run cron
 
-3. customer: 
-- username: `larry@gmail.com` password: `123456`
+alternatively you can set a cron job to your server: 
 
-feel free to create your own user and assign permissions or you can register from the refistration form and default role will customer.
+```
+* * * * * cd /path-to-your-project_source_codes && php artisan schedule:run >> /dev/null 2>&1
+```
 
+- there is also unit test that can be run: `./vendor/bin/phpunit` or `./vendor/bin/phpunit --group testGettingWeatherData` you will have to be inside src forlder to run it or inside docker container if you are runing a container
+
+## Extra
+
+there is a database design that I included to show how I came up with my tables and relationships 

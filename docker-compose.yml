@@ -30,6 +30,7 @@ services:
       - "3313:3306"
     networks:
       - decisioningit_weather
+  # cron job service
 
 networks:
   decisioningit_weather:
