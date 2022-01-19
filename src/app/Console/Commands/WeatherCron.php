@@ -46,6 +46,8 @@ class WeatherCron extends Command {
 		$response = $request->getBody()->getContents();
 		$weather_data = json_decode($response, true);
 
+		$city_name = $this->argument('city');
+
 		$weather = [];
 		$region = [];
 		$city = [];
@@ -118,14 +120,7 @@ class WeatherCron extends Command {
 
 		$weatherModel = Weather::updateOrCreate(['city_id' => $weather['city_id'], 'last_updated' => $weather['last_updated']], $weather);
 
-		// print_r($countryModel);
-		// print_r($regionModel);
-		// print_r($cityModel);
-
-		// print_r($weather_data);
-
-		// print_r($weatherModel);
-		print_r($weather);
+		$this->info("Saving weather info for: {$city_name}!");
 
 	}
 }
