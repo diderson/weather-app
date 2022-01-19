@@ -70,4 +70,4 @@ alternatively you can set a cron job to your server:
 
 ## Extra
 
-there is a database design that I included to show how I came up with my tables and relationships 
+There is a database design that I included to show how I came up with my tables and relationships check the resources folder
